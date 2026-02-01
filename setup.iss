@@ -10,6 +10,7 @@ LicenseFile=LICENSE
 SolidCompression=yes
 OutputDir=dist
 OutputBaseFilename=ConvertImage_Installer
+ArchitecturesInstallIn64BitMode=x64compatible
 
 [Files]
 Source: "dist\ConvertImage.exe"; DestDir: "{app}"; Flags: ignoreversion
