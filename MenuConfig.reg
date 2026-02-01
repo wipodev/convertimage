@@ -1,0 +1,97 @@
+Windows Registry Editor Version 5.00
+
+; --- REGISTRO PARA ARCHIVOS .PNG ---
+[HKEY_CLASSES_ROOT\SystemFileAssociations\.png\shell\ConvertImageMenu]
+"MUIVerb"="Convert Image"
+"SubCommands"=""
+"Icon"="C:\\Program Files\\Convert Image\\ConvertImage.exe"
+
+[HKEY_CLASSES_ROOT\SystemFileAssociations\.png\shell\ConvertImageMenu\shell\01_ico]
+@="Convertir a Icono (.ico)"
+"Icon"="imageres.dll,197"
+[HKEY_CLASSES_ROOT\SystemFileAssociations\.png\shell\ConvertImageMenu\shell\01_ico\command]
+@="\"C:\\Program Files\\Convert Image\\ConvertImage.exe\" ico \"%1\""
+
+[HKEY_CLASSES_ROOT\SystemFileAssociations\.png\shell\ConvertImageMenu\shell\02_jpg]
+@="Convertir a Imagen (.jpg)"
+"Icon"="imageres.dll,72"
+[HKEY_CLASSES_ROOT\SystemFileAssociations\.png\shell\ConvertImageMenu\shell\02_jpg\command]
+@="\"C:\\Program Files\\Convert Image\\ConvertImage.exe\" jpg \"%1\""
+
+[HKEY_CLASSES_ROOT\SystemFileAssociations\.png\shell\ConvertImageMenu\shell\03_webp]
+@="Convertir a Imagen (.webp)"
+"Icon"="imageres.dll,11"
+[HKEY_CLASSES_ROOT\SystemFileAssociations\.png\shell\ConvertImageMenu\shell\03_webp\command]
+@="\"C:\\Program Files\\Convert Image\\ConvertImage.exe\" webp \"%1\""
+
+; --- REGISTRO PARA ARCHIVOS .JPG ---
+[HKEY_CLASSES_ROOT\SystemFileAssociations\.jpg\shell\ConvertImageMenu]
+"MUIVerb"="Convert Image"
+"SubCommands"=""
+"Icon"="C:\\Program Files\\Convert Image\\ConvertImage.exe"
+
+[HKEY_CLASSES_ROOT\SystemFileAssociations\.jpg\shell\ConvertImageMenu\shell\01_ico]
+@="Convertir a Icono (.ico)"
+"Icon"="imageres.dll,197"
+[HKEY_CLASSES_ROOT\SystemFileAssociations\.jpg\shell\ConvertImageMenu\shell\01_ico\command]
+@="\"C:\\Program Files\\Convert Image\\ConvertImage.exe\" ico \"%1\""
+
+[HKEY_CLASSES_ROOT\SystemFileAssociations\.jpg\shell\ConvertImageMenu\shell\02_png]
+@="Convertir a Imagen (.png)"
+"Icon"="imageres.dll,71"
+[HKEY_CLASSES_ROOT\SystemFileAssociations\.jpg\shell\ConvertImageMenu\shell\02_png\command]
+@="\"C:\\Program Files\\Convert Image\\ConvertImage.exe\" png \"%1\""
+
+[HKEY_CLASSES_ROOT\SystemFileAssociations\.jpg\shell\ConvertImageMenu\shell\03_webp]
+@="Convertir a Imagen (.webp)"
+"Icon"="imageres.dll,11"
+[HKEY_CLASSES_ROOT\SystemFileAssociations\.jpg\shell\ConvertImageMenu\shell\03_webp\command]
+@="\"C:\\Program Files\\Convert Image\\ConvertImage.exe\" webp \"%1\""
+
+; --- REGISTRO PARA ARCHIVOS .WEBP ---
+[HKEY_CLASSES_ROOT\SystemFileAssociations\.webp\shell\ConvertImageMenu]
+"MUIVerb"="Convert Image"
+"SubCommands"=""
+"Icon"="C:\\Program Files\\Convert Image\\ConvertImage.exe"
+
+[HKEY_CLASSES_ROOT\SystemFileAssociations\.webp\shell\ConvertImageMenu\shell\01_ico]
+@="Convertir a Icono (.ico)"
+"Icon"="imageres.dll,197"
+[HKEY_CLASSES_ROOT\SystemFileAssociations\.webp\shell\ConvertImageMenu\shell\01_ico\command]
+@="\"C:\\Program Files\\Convert Image\\ConvertImage.exe\" ico \"%1\""
+
+[HKEY_CLASSES_ROOT\SystemFileAssociations\.webp\shell\ConvertImageMenu\shell\02_png]
+@="Convertir a Imagen (.png)"
+"Icon"="imageres.dll,71"
+[HKEY_CLASSES_ROOT\SystemFileAssociations\.webp\shell\ConvertImageMenu\shell\02_png\command]
+@="\"C:\\Program Files\\Convert Image\\ConvertImage.exe\" png \"%1\""
+
+[HKEY_CLASSES_ROOT\SystemFileAssociations\.webp\shell\ConvertImageMenu\shell\03_jpg]
+@="Convertir a Imagen (.jpg)"
+"Icon"="imageres.dll,72"
+[HKEY_CLASSES_ROOT\SystemFileAssociations\.webp\shell\ConvertImageMenu\shell\03_jpg\command]
+@="\"C:\\Program Files\\Convert Image\\ConvertImage.exe\" jpg \"%1\""
+
+; --- REGISTRO PARA ARCHIVOS .ICO ---
+[HKEY_CLASSES_ROOT\SystemFileAssociations\.ico\shell\ConvertImageMenu]
+"MUIVerb"="Convert Image"
+"SubCommands"=""
+"Icon"="C:\\Program Files\\Convert Image\\ConvertImage.exe"
+
+[HKEY_CLASSES_ROOT\SystemFileAssociations\.ico\shell\ConvertImageMenu\shell\01_png]
+@="Convertir a Imagen (.png)"
+"Icon"="imageres.dll,71"
+[HKEY_CLASSES_ROOT\SystemFileAssociations\.ico\shell\ConvertImageMenu\shell\01_png\command]
+@="\"C:\\Program Files\\Convert Image\\ConvertImage.exe\" png \"%1\""
+
+[HKEY_CLASSES_ROOT\SystemFileAssociations\.ico\shell\ConvertImageMenu\shell\02_jpg]
+@="Convertir a Imagen (.jpg)"
+"Icon"="imageres.dll,72"
+[HKEY_CLASSES_ROOT\SystemFileAssociations\.ico\shell\ConvertImageMenu\shell\02_jpg\command]
+@="\"C:\\Program Files\\Convert Image\\ConvertImage.exe\" jpg \"%1\""
+
+[HKEY_CLASSES_ROOT\SystemFileAssociations\.ico\shell\ConvertImageMenu\shell\03_webp]
+@="Convertir a Imagen (.webp)"
+"Icon"="imageres.dll,11"
+[HKEY_CLASSES_ROOT\SystemFileAssociations\.ico\shell\ConvertImageMenu\shell\03_webp\command]
+@="\"C:\\Program Files\\Convert Image\\ConvertImage.exe\" webp \"%1\""
