@@ -4,6 +4,18 @@ import traceback
 import sys
 from src.helper import show_help, is_image_extension
 
+def make_square(img, size=256):
+    """Añade padding transparente para hacer la imagen cuadrada sin deformarla."""
+    new_img = Image.new("RGBA", (size, size), (0, 0, 0, 0))
+    
+    img.thumbnail((size, size), Image.Resampling.LANCZOS)
+    
+    x = (size - img.width) // 2
+    y = (size - img.height) // 2
+    
+    new_img.paste(img, (x, y))
+    return new_img
+
 def convert_to(target_format: str, image_path: str) -> None:
     """
     Convierte una imagen a un formato específico de forma universal.
@@ -36,7 +48,9 @@ def convert_to(target_format: str, image_path: str) -> None:
             
             # Solo añadir tamaños si es un archivo de icono (.ico)
             if fmt == "ICO":
-                icon_sizes = [(16, 16), (32, 32), (48, 48), (64, 64), (128, 128), (256, 256)]
+                icon_sizes = [(256, 256), (128, 128), (64, 64), (48, 48), (32, 32), (16, 16)]
+                img = make_square(img, 256)
+                img = img.convert("RGBA")
                 save_args["sizes"] = icon_sizes
 
             # 4. Guardado final

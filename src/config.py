@@ -18,7 +18,7 @@ COMMANDS = {
 }
 
 EXTENSIONS = {
-  "jpg", "jpeg", "png", "gif", "bmp", "webp", "tiff", "svg"
+  "ico", "jpg", "jpeg", "png", "gif", "bmp", "webp", "tiff", "svg"
 }
 
 RC_CONTENT = """
