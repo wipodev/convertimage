@@ -1,120 +1,140 @@
+; 1. DEFINICIONES DE VARIABLES
+#define APP_NAME "Image Toolkit"
+#define APP_SUBKEY "ImageToolKit"
+#define APP_EXE "{app}\ImageToolkit.exe"
+#define ICON_DLL "{app}\ImageToolkit.dll"
+#define CMD_STORE "SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\CommandStore\shell\ITK."
+
 [Setup]
-AppName=Convert Image
-AppVersion=1.0.0
+AppName={#APP_NAME}
+AppVersion=1.1.0
 AppPublisher=WipoDev
-AppPublisherURL=https://github.com/wipodev/convertimage
-AppSupportURL=https://github.com/wipodev/convertimage/issues
-AppUpdatesURL=https://github.com/wipodev/convertimage/release
+AppPublisherURL=https://github.com/wipodev/ImageToolkit
+AppSupportURL=https://github.com/wipodev/ImageToolkit/issues
+AppUpdatesURL=https://github.com/wipodev/ImageToolkit/releases
 VersionInfoCompany=WipoDev
 VersionInfoCopyright=© 2026 WipoDev. Apache 2.0 License.
-VersionInfoDescription=Instalador de Convert Image Pro
-VersionInfoProductName=Convert Image Pro
-VersionInfoProductVersion=1.0.0.0
-VersionInfoTextVersion=1.0.0.0
-VersionInfoVersion=1.0.0.0
-DefaultDirName={autopf}\Convert Image
-DefaultGroupName=Convert Image
-SetupIconFile=assets\installer.ico
-UninstallDisplayIcon={app}\ConvertImage.exe
+VersionInfoDescription=Instalador de {#APP_NAME}
+VersionInfoProductName={#APP_NAME}
+VersionInfoProductVersion=1.1.0.0
+VersionInfoTextVersion=1.1.0.0
+VersionInfoVersion=1.1.0.0
+DefaultDirName={autopf}\{#APP_NAME}
+DefaultGroupName={#APP_NAME}
+SetupIconFile=assets\itk1.ico
+UninstallDisplayIcon={app}\ImageToolkit.exe
 Compression=lzma
 LicenseFile=LICENSE
 SolidCompression=yes
 OutputDir=dist
-OutputBaseFilename=ConvertImage_Installer
+OutputBaseFilename=ImageToolkit_Installer
 ArchitecturesInstallIn64BitMode=x64compatible
 
 [Files]
-Source: "dist\ConvertImage.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "dist\ImageToolkit.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "dist\ImageToolkit.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "tools\*"; DestDir: "{app}\tools"; Flags: ignoreversion recursesubdirs createallsubdirs
 
 [Icons]
-Name: "{group}\Convert Image"; Filename: "{app}\ConvertImage.exe"
+Name: "{group}\{#APP_NAME}"; Filename: "{#ICON_DLL},0"
 
 [Registry]
-; --- SOPORTE PARA .PNG ---
-Root: HKCR; Subkey: "SystemFileAssociations\.png\shell\ConvertImageMenu"; ValueType: string; ValueName: "MUIVerb"; ValueData: "Convert Image"; Flags: uninsdeletekey
-Root: HKCR; Subkey: "SystemFileAssociations\.png\shell\ConvertImageMenu"; ValueType: string; ValueName: "SubCommands"; ValueData: ""; Flags: uninsdeletekey
-Root: HKCR; Subkey: "SystemFileAssociations\.png\shell\ConvertImageMenu"; ValueType: string; ValueName: "Icon"; ValueData: "{app}\ConvertImage.exe,0"; Flags: uninsdeletekey
+; ##########################################################################
+; ===========================================================================
+; 1. ALMACÉN DE COMANDOS (CommandStore) con Iconos Individuales
+; ===========================================================================
 
-; Submenús para .PNG
-Root: HKCR; Subkey: "SystemFileAssociations\.png\shell\ConvertImageMenu\shell\01_ico"; ValueType: string; ValueData: "Convertir a Icono (.ico)"; Flags: uninsdeletekey
-Root: HKCR; Subkey: "SystemFileAssociations\.png\shell\ConvertImageMenu\shell\01_ico"; ValueType: string; ValueName: "Icon"; ValueData: "{app}\ConvertImage.exe,1"
-Root: HKCR; Subkey: "SystemFileAssociations\.png\shell\ConvertImageMenu\shell\01_ico\command"; ValueType: string; ValueData: """{app}\ConvertImage.exe"" ico ""%1"""; Flags: uninsdeletekey
+; --- Conversiones ---
+Root: HKLM; Subkey: "{#CMD_STORE}ico"; ValueType: string; ValueName: ""; ValueData: "Convertir a ICO"; Flags: uninsdeletekey
+Root: HKLM; Subkey: "{#CMD_STORE}ico"; ValueType: string; ValueName: "Icon"; ValueData: "{#ICON_DLL},2"; Flags: uninsdeletekey
+Root: HKLM; Subkey: "{#CMD_STORE}ico\command"; ValueType: string; ValueName: ""; ValueData: """{#APP_EXE}"" -c ico ""%1"""; Flags: uninsdeletekey
 
-Root: HKCR; Subkey: "SystemFileAssociations\.png\shell\ConvertImageMenu\shell\02_jpg"; ValueType: string; ValueData: "Convertir a Imagen (.jpg)"; Flags: uninsdeletekey
-Root: HKCR; Subkey: "SystemFileAssociations\.png\shell\ConvertImageMenu\shell\02_jpg"; ValueType: string; ValueName: "Icon"; ValueData: "{app}\ConvertImage.exe,2"
-Root: HKCR; Subkey: "SystemFileAssociations\.png\shell\ConvertImageMenu\shell\02_jpg\command"; ValueType: string; ValueData: """{app}\ConvertImage.exe"" jpg ""%1"""; Flags: uninsdeletekey
+Root: HKLM; Subkey: "{#CMD_STORE}png"; ValueType: string; ValueName: ""; ValueData: "Convertir a PNG"; Flags: uninsdeletekey
+Root: HKLM; Subkey: "{#CMD_STORE}png"; ValueType: string; ValueName: "Icon"; ValueData: "{#ICON_DLL},3"; Flags: uninsdeletekey
+Root: HKLM; Subkey: "{#CMD_STORE}png\command"; ValueType: string; ValueName: ""; ValueData: """{#APP_EXE}"" -c png ""%1"""; Flags: uninsdeletekey
 
-Root: HKCR; Subkey: "SystemFileAssociations\.png\shell\ConvertImageMenu\shell\03_webp"; ValueType: string; ValueData: "Convertir a Imagen (.webp)"; Flags: uninsdeletekey
-Root: HKCR; Subkey: "SystemFileAssociations\.png\shell\ConvertImageMenu\shell\03_webp"; ValueType: string; ValueName: "Icon"; ValueData: "{app}\ConvertImage.exe,4"
-Root: HKCR; Subkey: "SystemFileAssociations\.png\shell\ConvertImageMenu\shell\03_webp\command"; ValueType: string; ValueData: """{app}\ConvertImage.exe"" webp ""%1"""; Flags: uninsdeletekey
+Root: HKLM; Subkey: "{#CMD_STORE}jpg"; ValueType: string; ValueName: ""; ValueData: "Convertir a JPG"; Flags: uninsdeletekey
+Root: HKLM; Subkey: "{#CMD_STORE}jpg"; ValueType: string; ValueName: "Icon"; ValueData: "{#ICON_DLL},4"; Flags: uninsdeletekey
+Root: HKLM; Subkey: "{#CMD_STORE}jpg\command"; ValueType: string; ValueName: ""; ValueData: """{#APP_EXE}"" -c jpg ""%1"""; Flags: uninsdeletekey
 
-; --- SOPORTE PARA .JPG ---
-Root: HKCR; Subkey: "SystemFileAssociations\.jpg\shell\ConvertImageMenu"; ValueType: string; ValueName: "MUIVerb"; ValueData: "Convert Image"; Flags: uninsdeletekey
-Root: HKCR; Subkey: "SystemFileAssociations\.jpg\shell\ConvertImageMenu"; ValueType: string; ValueName: "SubCommands"; ValueData: ""; Flags: uninsdeletekey
-Root: HKCR; Subkey: "SystemFileAssociations\.jpg\shell\ConvertImageMenu"; ValueType: string; ValueName: "Icon"; ValueData: "{app}\ConvertImage.exe,0"; Flags: uninsdeletekey
+Root: HKLM; Subkey: "{#CMD_STORE}webp"; ValueType: string; ValueName: ""; ValueData: "Convertir a WEBP"; Flags: uninsdeletekey
+Root: HKLM; Subkey: "{#CMD_STORE}webp"; ValueType: string; ValueName: "Icon"; ValueData: "{#ICON_DLL},5"; Flags: uninsdeletekey
+Root: HKLM; Subkey: "{#CMD_STORE}webp\command"; ValueType: string; ValueName: ""; ValueData: """{#APP_EXE}"" -c webp ""%1"""; Flags: uninsdeletekey
 
-; Submenús para .JPG
-Root: HKCR; Subkey: "SystemFileAssociations\.jpg\shell\ConvertImageMenu\shell\01_ico"; ValueType: string; ValueData: "Convertir a Icono (.ico)"; Flags: uninsdeletekey
-Root: HKCR; Subkey: "SystemFileAssociations\.jpg\shell\ConvertImageMenu\shell\01_ico"; ValueType: string; ValueName: "Icon"; ValueData: "{app}\ConvertImage.exe,1"
-Root: HKCR; Subkey: "SystemFileAssociations\.jpg\shell\ConvertImageMenu\shell\01_ico\command"; ValueType: string; ValueData: """{app}\ConvertImage.exe"" ico ""%1"""; Flags: uninsdeletekey
+Root: HKLM; Subkey: "{#CMD_STORE}bmp"; ValueType: string; ValueName: ""; ValueData: "Convertir a BMP"; Flags: uninsdeletekey
+Root: HKLM; Subkey: "{#CMD_STORE}bmp"; ValueType: string; ValueName: "Icon"; ValueData: "{#ICON_DLL},6"; Flags: uninsdeletekey
+Root: HKLM; Subkey: "{#CMD_STORE}bmp\command"; ValueType: string; ValueName: ""; ValueData: """{#APP_EXE}"" -c bmp ""%1"""; Flags: uninsdeletekey
 
-Root: HKCR; Subkey: "SystemFileAssociations\.jpg\shell\ConvertImageMenu\shell\02_png"; ValueType: string; ValueData: "Convertir a Imagen (.png)"; Flags: uninsdeletekey
-Root: HKCR; Subkey: "SystemFileAssociations\.jpg\shell\ConvertImageMenu\shell\02_png"; ValueType: string; ValueName: "Icon"; ValueData: "{app}\ConvertImage.exe,3"
-Root: HKCR; Subkey: "SystemFileAssociations\.jpg\shell\ConvertImageMenu\shell\02_png\command"; ValueType: string; ValueData: """{app}\ConvertImage.exe"" png ""%1"""; Flags: uninsdeletekey
+Root: HKLM; Subkey: "{#CMD_STORE}tiff"; ValueType: string; ValueName: ""; ValueData: "Convertir a TIFF"; Flags: uninsdeletekey
+Root: HKLM; Subkey: "{#CMD_STORE}tiff"; ValueType: string; ValueName: "Icon"; ValueData: "{#ICON_DLL},7"; Flags: uninsdeletekey
+Root: HKLM; Subkey: "{#CMD_STORE}tiff\command"; ValueType: string; ValueName: ""; ValueData: """{#APP_EXE}"" -c tiff ""%1"""; Flags: uninsdeletekey
 
-Root: HKCR; Subkey: "SystemFileAssociations\.jpg\shell\ConvertImageMenu\shell\03_webp"; ValueType: string; ValueData: "Convertir a Imagen (.webp)"; Flags: uninsdeletekey
-Root: HKCR; Subkey: "SystemFileAssociations\.jpg\shell\ConvertImageMenu\shell\03_webp"; ValueType: string; ValueName: "Icon"; ValueData: "{app}\ConvertImage.exe,4"
-Root: HKCR; Subkey: "SystemFileAssociations\.jpg\shell\ConvertImageMenu\shell\03_webp\command"; ValueType: string; ValueData: """{app}\ConvertImage.exe"" webp ""%1"""; Flags: uninsdeletekey
+; --- Herramientas ---
+Root: HKLM; Subkey: "{#CMD_STORE}resize"; ValueType: string; ValueData: "Redimensionar imagen"; Flags: uninsdeletekey
+Root: HKLM; Subkey: "{#CMD_STORE}resize"; ValueType: string; ValueName: "Icon"; ValueData: "{#ICON_DLL},8"; Flags: uninsdeletekey
+Root: HKLM; Subkey: "{#CMD_STORE}resize\command"; ValueType: string; ValueData: """{#APP_EXE}"" -r ""%1"""; Flags: uninsdeletekey
 
-; --- SOPORTE PARA .JPEG ---
-Root: HKCR; Subkey: "SystemFileAssociations\.jpeg\shell\ConvertImageMenu"; ValueType: string; ValueName: "MUIVerb"; ValueData: "Convert Image"; Flags: uninsdeletekey
-Root: HKCR; Subkey: "SystemFileAssociations\.jpeg\shell\ConvertImageMenu"; ValueType: string; ValueName: "SubCommands"; ValueData: ""; Flags: uninsdeletekey
-Root: HKCR; Subkey: "SystemFileAssociations\.jpeg\shell\ConvertImageMenu"; ValueType: string; ValueName: "Icon"; ValueData: "{app}\ConvertImage.exe,0"; Flags: uninsdeletekey
+Root: HKLM; Subkey: "{#CMD_STORE}cut"; ValueType: string; ValueData: "Recortar imagen"; Flags: uninsdeletekey
+Root: HKLM; Subkey: "{#CMD_STORE}cut"; ValueType: string; ValueName: "Icon"; ValueData: "{#ICON_DLL},9"; Flags: uninsdeletekey
+Root: HKLM; Subkey: "{#CMD_STORE}cut\command"; ValueType: string; ValueData: """{#APP_EXE}"" -x ""%1"""; Flags: uninsdeletekey
 
-Root: HKCR; Subkey: "SystemFileAssociations\.jpeg\shell\ConvertImageMenu\shell\01_ico"; ValueType: string; ValueData: "Convertir a Icono (.ico)"; Flags: uninsdeletekey
-Root: HKCR; Subkey: "SystemFileAssociations\.jpeg\shell\ConvertImageMenu\shell\01_ico"; ValueType: string; ValueName: "Icon"; ValueData: "{app}\ConvertImage.exe,1"
-Root: HKCR; Subkey: "SystemFileAssociations\.jpeg\shell\ConvertImageMenu\shell\01_ico\command"; ValueType: string; ValueData: """{app}\ConvertImage.exe"" ico ""%1"""
+Root: HKLM; Subkey: "{#CMD_STORE}opt"; ValueType: string; ValueData: "Optimizar imagen"; Flags: uninsdeletekey
+Root: HKLM; Subkey: "{#CMD_STORE}opt"; ValueType: string; ValueName: "Icon"; ValueData: "{#ICON_DLL},10"; Flags: uninsdeletekey
+Root: HKLM; Subkey: "{#CMD_STORE}opt\command"; ValueType: string; ValueData: """{#APP_EXE}"" -o ""%1"""; Flags: uninsdeletekey
 
-Root: HKCR; Subkey: "SystemFileAssociations\.jpeg\shell\ConvertImageMenu\shell\02_png"; ValueType: string; ValueData: "Convertir a Imagen (.png)"; Flags: uninsdeletekey
-Root: HKCR; Subkey: "SystemFileAssociations\.jpeg\shell\ConvertImageMenu\shell\02_png"; ValueType: string; ValueName: "Icon"; ValueData: "{app}\ConvertImage.exe,3"
-Root: HKCR; Subkey: "SystemFileAssociations\.jpeg\shell\ConvertImageMenu\shell\02_png\command"; ValueType: string; ValueData: """{app}\ConvertImage.exe"" png ""%1"""
+Root: HKLM; Subkey: "{#CMD_STORE}opt_def"; ValueType: string; ValueData: "Optimizar imagen (predeterminado)"; Flags: uninsdeletekey
+Root: HKLM; Subkey: "{#CMD_STORE}opt_def"; ValueType: string; ValueName: "Icon"; ValueData: "{#ICON_DLL},11"; Flags: uninsdeletekey
+Root: HKLM; Subkey: "{#CMD_STORE}opt_def\command"; ValueType: string; ValueData: """{#APP_EXE}"" -od ""%1"""; Flags: uninsdeletekey
 
-Root: HKCR; Subkey: "SystemFileAssociations\.jpeg\shell\ConvertImageMenu\shell\03_webp"; ValueType: string; ValueData: "Convertir a Imagen (.webp)"; Flags: uninsdeletekey
-Root: HKCR; Subkey: "SystemFileAssociations\.jpeg\shell\ConvertImageMenu\shell\03_webp"; ValueType: string; ValueName: "Icon"; ValueData: "{app}\ConvertImage.exe,4"
-Root: HKCR; Subkey: "SystemFileAssociations\.jpeg\shell\ConvertImageMenu\shell\03_webp\command"; ValueType: string; ValueData: """{app}\ConvertImage.exe"" webp ""%1"""
+Root: HKLM; Subkey: "{#CMD_STORE}pack"; ValueType: string; ValueData: "Empaquetar imágenes (DLL Resource)"; Flags: uninsdeletekey
+Root: HKLM; Subkey: "{#CMD_STORE}pack"; ValueType: string; ValueName: "Icon"; ValueData: "{#ICON_DLL},12"; Flags: uninsdeletekey
+Root: HKLM; Subkey: "{#CMD_STORE}pack\command"; ValueType: string; ValueData: """{#APP_EXE}"" -p ""%1"""; Flags: uninsdeletekey
 
-; --- SOPORTE PARA .WEBP ---
-Root: HKCR; Subkey: "SystemFileAssociations\.webp\shell\ConvertImageMenu"; ValueType: string; ValueName: "MUIVerb"; ValueData: "Convert Image"; Flags: uninsdeletekey
-Root: HKCR; Subkey: "SystemFileAssociations\.webp\shell\ConvertImageMenu"; ValueType: string; ValueName: "SubCommands"; ValueData: ""; Flags: uninsdeletekey
-Root: HKCR; Subkey: "SystemFileAssociations\.webp\shell\ConvertImageMenu"; ValueType: string; ValueName: "Icon"; ValueData: "{app}\ConvertImage.exe,0"; Flags: uninsdeletekey
+; ===========================================================================
+; 2. ASOCIACIONES POR EXTENSIÓN (IMÁGENES)
+; ===========================================================================
+Root: HKCR; Subkey: "SystemFileAssociations\.ico\shell\{#APP_SUBKEY}"; ValueType: string; ValueName: "MUIVerb"; ValueData: "{#APP_NAME}"; Flags: uninsdeletekey
+Root: HKCR; Subkey: "SystemFileAssociations\.ico\shell\{#APP_SUBKEY}"; ValueType: string; ValueName: "Icon"; ValueData: "{#ICON_DLL},0"; Flags: uninsdeletekey
+Root: HKCR; Subkey: "SystemFileAssociations\.ico\shell\{#APP_SUBKEY}"; ValueType: string; ValueName: "SubCommands"; ValueData: "ITK.jpg;ITK.png;ITK.webp;ITK.bmp;ITK.tiff;|;ITK.resize;ITK.opt;ITK.opt_def;ITK.cut"; Flags: uninsdeletekey
 
-; Submenús para .WEBP
-Root: HKCR; Subkey: "SystemFileAssociations\.webp\shell\ConvertImageMenu\shell\01_ico"; ValueType: string; ValueData: "Convertir a Icono (.ico)"; Flags: uninsdeletekey
-Root: HKCR; Subkey: "SystemFileAssociations\.webp\shell\ConvertImageMenu\shell\01_ico"; ValueType: string; ValueName: "Icon"; ValueData: "{app}\ConvertImage.exe,1"
-Root: HKCR; Subkey: "SystemFileAssociations\.webp\shell\ConvertImageMenu\shell\01_ico\command"; ValueType: string; ValueData: """{app}\ConvertImage.exe"" ico ""%1"""; Flags: uninsdeletekey
+Root: HKCR; Subkey: "SystemFileAssociations\.jpg\shell\{#APP_SUBKEY}"; ValueType: string; ValueName: "MUIVerb"; ValueData: "{#APP_NAME}"; Flags: uninsdeletekey
+Root: HKCR; Subkey: "SystemFileAssociations\.jpg\shell\{#APP_SUBKEY}"; ValueType: string; ValueName: "Icon"; ValueData: "{#ICON_DLL},0"; Flags: uninsdeletekey
+Root: HKCR; Subkey: "SystemFileAssociations\.jpg\shell\{#APP_SUBKEY}"; ValueType: string; ValueName: "SubCommands"; ValueData: "ITK.ico;ITK.png;ITK.webp;ITK.bmp;ITK.tiff;|;ITK.resize;ITK.opt;ITK.opt_def;ITK.cut"; Flags: uninsdeletekey
 
-Root: HKCR; Subkey: "SystemFileAssociations\.webp\shell\ConvertImageMenu\shell\02_png"; ValueType: string; ValueData: "Convertir a Imagen (.png)"; Flags: uninsdeletekey
-Root: HKCR; Subkey: "SystemFileAssociations\.webp\shell\ConvertImageMenu\shell\02_png"; ValueType: string; ValueName: "Icon"; ValueData: "{app}\ConvertImage.exe,3"
-Root: HKCR; Subkey: "SystemFileAssociations\.webp\shell\ConvertImageMenu\shell\02_png\command"; ValueType: string; ValueData: """{app}\ConvertImage.exe"" png ""%1"""; Flags: uninsdeletekey
+Root: HKCR; Subkey: "SystemFileAssociations\.jpeg\shell\{#APP_SUBKEY}"; ValueType: string; ValueName: "MUIVerb"; ValueData: "{#APP_NAME}"; Flags: uninsdeletekey
+Root: HKCR; Subkey: "SystemFileAssociations\.jpeg\shell\{#APP_SUBKEY}"; ValueType: string; ValueName: "Icon"; ValueData: "{#ICON_DLL},0"; Flags: uninsdeletekey
+Root: HKCR; Subkey: "SystemFileAssociations\.jpeg\shell\{#APP_SUBKEY}"; ValueType: string; ValueName: "SubCommands"; ValueData: "ITK.ico;ITK.png;ITK.webp;ITK.bmp;ITK.tiff;|;ITK.resize;ITK.opt;ITK.opt_def;ITK.cut"; Flags: uninsdeletekey
 
-Root: HKCR; Subkey: "SystemFileAssociations\.webp\shell\ConvertImageMenu\shell\03_jpg"; ValueType: string; ValueData: "Convertir a Imagen (.jpg)"; Flags: uninsdeletekey
-Root: HKCR; Subkey: "SystemFileAssociations\.webp\shell\ConvertImageMenu\shell\03_jpg"; ValueType: string; ValueName: "Icon"; ValueData: "{app}\ConvertImage.exe,2"
-Root: HKCR; Subkey: "SystemFileAssociations\.webp\shell\ConvertImageMenu\shell\03_jpg\command"; ValueType: string; ValueData: """{app}\ConvertImage.exe"" jpg ""%1"""; Flags: uninsdeletekey
+Root: HKCR; Subkey: "SystemFileAssociations\.png\shell\{#APP_SUBKEY}"; ValueType: string; ValueName: "MUIVerb"; ValueData: "{#APP_NAME}"; Flags: uninsdeletekey
+Root: HKCR; Subkey: "SystemFileAssociations\.png\shell\{#APP_SUBKEY}"; ValueType: string; ValueName: "Icon"; ValueData: "{#ICON_DLL},0"; Flags: uninsdeletekey
+Root: HKCR; Subkey: "SystemFileAssociations\.png\shell\{#APP_SUBKEY}"; ValueType: string; ValueName: "SubCommands"; ValueData: "ITK.ico;ITK.jpg;ITK.webp;ITK.bmp;ITK.tiff;|;ITK.resize;ITK.opt;ITK.opt_def;ITK.cut"; Flags: uninsdeletekey
 
-; --- SOPORTE PARA .ICO ---
-Root: HKCR; Subkey: "SystemFileAssociations\.ico\shell\ConvertImageMenu"; ValueType: string; ValueName: "MUIVerb"; ValueData: "Convert Image"; Flags: uninsdeletekey
-Root: HKCR; Subkey: "SystemFileAssociations\.ico\shell\ConvertImageMenu"; ValueType: string; ValueName: "SubCommands"; ValueData: ""; Flags: uninsdeletekey
-Root: HKCR; Subkey: "SystemFileAssociations\.ico\shell\ConvertImageMenu"; ValueType: string; ValueName: "Icon"; ValueData: "{app}\ConvertImage.exe,0"; Flags: uninsdeletekey
+Root: HKCR; Subkey: "SystemFileAssociations\.webp\shell\{#APP_SUBKEY}"; ValueType: string; ValueName: "MUIVerb"; ValueData: "{#APP_NAME}"; Flags: uninsdeletekey
+Root: HKCR; Subkey: "SystemFileAssociations\.webp\shell\{#APP_SUBKEY}"; ValueType: string; ValueName: "Icon"; ValueData: "{#ICON_DLL},0"; Flags: uninsdeletekey
+Root: HKCR; Subkey: "SystemFileAssociations\.webp\shell\{#APP_SUBKEY}"; ValueType: string; ValueName: "SubCommands"; ValueData: "ITK.ico;ITK.jpg;ITK.png;ITK.bmp;ITK.tiff;|;ITK.resize;ITK.opt;ITK.opt_def;ITK.cut"; Flags: uninsdeletekey
 
-; Submenús para .ICO
-Root: HKCR; Subkey: "SystemFileAssociations\.ico\shell\ConvertImageMenu\shell\01_png"; ValueType: string; ValueData: "Convertir a Imagen (.png)"; Flags: uninsdeletekey
-Root: HKCR; Subkey: "SystemFileAssociations\.ico\shell\ConvertImageMenu\shell\01_png"; ValueType: string; ValueName: "Icon"; ValueData: "{app}\ConvertImage.exe,3"
-Root: HKCR; Subkey: "SystemFileAssociations\.ico\shell\ConvertImageMenu\shell\01_png\command"; ValueType: string; ValueData: """{app}\ConvertImage.exe"" png ""%1"""; Flags: uninsdeletekey
+Root: HKCR; Subkey: "SystemFileAssociations\.bmp\shell\{#APP_SUBKEY}"; ValueType: string; ValueName: "MUIVerb"; ValueData: "{#APP_NAME}"; Flags: uninsdeletekey
+Root: HKCR; Subkey: "SystemFileAssociations\.bmp\shell\{#APP_SUBKEY}"; ValueType: string; ValueName: "Icon"; ValueData: "{#ICON_DLL},0"; Flags: uninsdeletekey
+Root: HKCR; Subkey: "SystemFileAssociations\.bmp\shell\{#APP_SUBKEY}"; ValueType: string; ValueName: "SubCommands"; ValueData: "ITK.ico;ITK.jpg;ITK.png;ITK.webp;ITK.tiff;|;ITK.resize;ITK.opt;ITK.opt_def;ITK.cut"; Flags: uninsdeletekey
 
-Root: HKCR; Subkey: "SystemFileAssociations\.ico\shell\ConvertImageMenu\shell\02_jpg"; ValueType: string; ValueData: "Convertir a Imagen (.jpg)"; Flags: uninsdeletekey
-Root: HKCR; Subkey: "SystemFileAssociations\.ico\shell\ConvertImageMenu\shell\02_jpg"; ValueType: string; ValueName: "Icon"; ValueData: "{app}\ConvertImage.exe,2"
-Root: HKCR; Subkey: "SystemFileAssociations\.ico\shell\ConvertImageMenu\shell\02_jpg\command"; ValueType: string; ValueData: """{app}\ConvertImage.exe"" jpg ""%1"""; Flags: uninsdeletekey
+Root: HKCR; Subkey: "SystemFileAssociations\.tiff\shell\{#APP_SUBKEY}"; ValueType: string; ValueName: "MUIVerb"; ValueData: "{#APP_NAME}"; Flags: uninsdeletekey
+Root: HKCR; Subkey: "SystemFileAssociations\.tiff\shell\{#APP_SUBKEY}"; ValueType: string; ValueName: "Icon"; ValueData: "{#ICON_DLL},0"; Flags: uninsdeletekey
+Root: HKCR; Subkey: "SystemFileAssociations\.tiff\shell\{#APP_SUBKEY}"; ValueType: string; ValueName: "SubCommands"; ValueData: "ITK.ico;ITK.jpg;ITK.png;ITK.webp;ITK.bmp;|;ITK.resize;ITK.opt;ITK.opt_def;ITK.cut"; Flags: uninsdeletekey
 
-Root: HKCR; Subkey: "SystemFileAssociations\.ico\shell\ConvertImageMenu\shell\03_webp"; ValueType: string; ValueData: "Convertir a Imagen (.webp)"; Flags: uninsdeletekey
-Root: HKCR; Subkey: "SystemFileAssociations\.ico\shell\ConvertImageMenu\shell\03_webp"; ValueType: string; ValueName: "Icon"; ValueData: "{app}\ConvertImage.exe,4"
-Root: HKCR; Subkey: "SystemFileAssociations\.ico\shell\ConvertImageMenu\shell\03_webp\command"; ValueType: string; ValueData: """{app}\ConvertImage.exe"" webp ""%1"""; Flags: uninsdeletekey
+Root: HKCR; Subkey: "SystemFileAssociations\image\shell\{#APP_SUBKEY}"; ValueType: string; ValueName: "MUIVerb"; ValueData: "{#APP_NAME}"; Flags: uninsdeletekey
+Root: HKCR; Subkey: "SystemFileAssociations\image\shell\{#APP_SUBKEY}"; ValueType: string; ValueName: "Icon"; ValueData: "{#ICON_DLL},0"; Flags: uninsdeletekey
+Root: HKCR; Subkey: "SystemFileAssociations\image\shell\{#APP_SUBKEY}"; ValueType: string; ValueName: "SubCommands"; ValueData: "ITK.ico;ITK.jpg;ITK.png;ITK.webp;ITK.bmp;ITK.tiff;|;ITK.resize;ITK.opt;ITK.opt_def;ITK.cut"; Flags: uninsdeletekey
+
+; ===========================================================================
+; 3. CARPETAS Y MULTISELECCIÓN
+; ===========================================================================
+
+; Directorios (Botón derecho sobre la carpeta)
+Root: HKCR; Subkey: "Directory\shell\{#APP_SUBKEY}"; ValueType: string; ValueName: "MUIVerb"; ValueData: "{#APP_NAME}"; Flags: uninsdeletekey
+Root: HKCR; Subkey: "Directory\shell\{#APP_SUBKEY}"; ValueType: string; ValueName: "Icon"; ValueData: "{#ICON_DLL},0"; Flags: uninsdeletekey
+Root: HKCR; Subkey: "Directory\shell\{#APP_SUBKEY}"; ValueType: string; ValueName: "SubCommands"; ValueData: "ITK.ico;ITK.jpg;ITK.png;ITK.webp;ITK.bmp;ITK.tiff;|;ITK.opt_def;ITK.pack"; Flags: uninsdeletekey
+
+; Background (Fondo blanco de carpeta)
+Root: HKCR; Subkey: "Directory\Background\shell\{#APP_SUBKEY}"; ValueType: string; ValueName: "MUIVerb"; ValueData: "{#APP_NAME}"; Flags: uninsdeletekey
+Root: HKCR; Subkey: "Directory\Background\shell\{#APP_SUBKEY}"; ValueType: string; ValueName: "Icon"; ValueData: "{#ICON_DLL},0"; Flags: uninsdeletekey
+Root: HKCR; Subkey: "Directory\Background\shell\{#APP_SUBKEY}"; ValueType: string; ValueName: "SubCommands"; ValueData: "ITK.ico;ITK.jpg;ITK.png;ITK.webp;ITK.bmp;ITK.tiff;|;ITK.opt_def;ITK.pack"; Flags: uninsdeletekey

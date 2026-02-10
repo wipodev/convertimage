@@ -2,8 +2,9 @@ from pathlib import Path
 from PIL import Image
 import traceback
 import sys
+from src.helper import show_help, is_image_extension
 
-def convert_to(image_path: str, target_format: str) -> None:
+def convert_to(target_format: str, image_path: str) -> None:
     """
     Convierte una imagen a un formato específico de forma universal.
     
@@ -49,9 +50,20 @@ def convert_to(image_path: str, target_format: str) -> None:
             traceback.print_exc(file=f)
         print("Error: Revisa 'convert_error.log' para más detalles.")
 
+def convert(ext: str, path: str) -> None:
+  if not path:
+    print("Ruta de imagen no válida")
+    show_help()
+    return
+  
+  if not is_image_extension(ext):
+    print("Extensión de imagen no válida")
+    show_help()
+    return
+  convert_to(ext, path)
+
 if __name__ == "__main__":
-    # Uso: python script.py png imagen.jpg
-    if len(sys.argv) >= 3:
-        convert_to(sys.argv[2], sys.argv[1])
+    if len(sys.argv) < 3:
+        show_help()
     else:
-        print("Uso: python script.py [formato_destino] [ruta_imagen]")
+        convert(sys.argv[1], sys.argv[2])

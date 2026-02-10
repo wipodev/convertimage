@@ -1,6 +1,6 @@
-# 📸 Convert Image (Context Menu)
+# 📸 Image Toolkit (Context Menu)
 
-**Convert Image** es una herramienta profesional para Windows que permite convertir imágenes entre múltiples formatos (**PNG, JPG, WEBP e ICO**) directamente desde el menú contextual del explorador de archivos.
+**Image Toolkit** es una herramienta profesional para Windows que permite convertir imágenes entre múltiples formatos (**PNG, JPG, WEBP e ICO**) directamente desde el menú contextual del explorador de archivos.
 
 ---
 
@@ -17,7 +17,7 @@
 ## 🚀 Instalación
 
 1. Ve a la sección de **Releases** de este repositorio.
-2. Descarga la última versión de **ConvertImage_Installer.exe**.
+2. Descarga la última versión de **ImageToolkit_Installer.exe**.
 3. Ejecuta el instalador. ¡Listo! Ya puedes hacer clic derecho sobre tus imágenes.
 
 ---
@@ -32,8 +32,8 @@ Se recomienda encarecidamente el uso de un entorno virtual para mantener limpias
 
 ```bash
 # Clonar el repositorio
-git clone https://github.com/wipodev/convertimage.git
-cd convertimage
+git clone https://github.com/wipodev/ImageToolkit.git
+cd ImageToolkit
 
 # Crear entorno virtual
 python -m venv venv
@@ -47,8 +47,8 @@ pip install -r requirements.txt
 
 ### 2. Estructura del Proyecto
 
-- **ConvertImage.py**: Lógica principal de procesamiento (Pillow).
-- **ConvertImage.spec**: Configuración de empaquetado para PyInstaller.
+- **ImageToolkit.py**: Lógica principal de procesamiento (Pillow).
+- **app.spec**: Configuración de empaquetado para PyInstaller.
 - **setup.iss**: Script de Inno Setup para el instalador y registro de Windows.
 - **build.py**: Script de automatización total del proceso de construcción.
 

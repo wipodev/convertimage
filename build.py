@@ -2,6 +2,7 @@ import os
 import subprocess
 import shutil
 from pathlib import Path
+from src.pack import pack
 
 # --- CONFIGURACIÓN DE RUTAS ---
 # Obtenemos el APPDATA del sistema
@@ -10,7 +11,7 @@ INNO_SETUP_EXE = Path(APPDATA) / "Programs/Inno Setup 6/ISCC.exe"
 
 # Rutas del proyecto
 BASE_DIR = Path(__file__).parent
-SPEC_FILE = BASE_DIR / "ConvertImage.spec"
+SPEC_FILE = BASE_DIR / "app.spec"
 ISS_FILE = BASE_DIR / "setup.iss"
 
 def clean_folders():
@@ -25,7 +26,6 @@ def run_pyinstaller():
     """Ejecuta PyInstaller usando el archivo .spec."""
     print("[*] Iniciando PyInstaller...")
     try:
-        # Ejecutamos: pyinstaller ConvertImage.spec
         subprocess.run(["pyinstaller", str(SPEC_FILE)], check=True)
         print("[+] PyInstaller terminó con éxito.")
     except subprocess.CalledProcessError as e:
@@ -51,5 +51,6 @@ if __name__ == "__main__":
     print("--- INICIANDO PROCESO DE BUILD ---")
     clean_folders()
     run_pyinstaller()
+    pack("assets", "dist/imagetoolkit")
     run_inno_setup()
     print("--- PROCESO FINALIZADO ---")

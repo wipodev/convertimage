@@ -9,8 +9,11 @@ __pycache__/
 # PyInstaller y Compilación
 build/
 dist/
-*.exe
-*.log
 
 # Inno Setup carpetas temporales
 Output/
+
+test/
+test.py
+/*.dll
+*.ini
