@@ -153,7 +153,7 @@ class MainWindow(BaseWindow):
             self.img_comp.resize_from_value(w, h)
         except ValueError: pass
 
-    def save_resized_image(self, _):
+    def save_resized_image(self):
         try:
             tw, th = int(self.input_w.text()), int(self.input_h.text())
             name = self.input_name.text().strip()

@@ -131,5 +131,5 @@ class BaseWindow(QMainWindow):
 
     def _on_execute(self):
         if self.callback:
-            self.callback(self)
+            self.callback()
         self.close()

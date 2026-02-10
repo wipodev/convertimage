@@ -52,7 +52,7 @@ class MainWindow(BaseWindow):
             f"Ahorro: {ahorro:.1f}%"
         )
 
-    def run_optimization(self, _):
+    def run_optimization(self):
         """Acción final al darle al botón azul"""
         calidad = self.slider.value()
         new_name = self.input_name.text().strip()
